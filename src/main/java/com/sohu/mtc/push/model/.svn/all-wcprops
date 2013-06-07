@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/model
+END
+IosMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/model/IosMessage.java
+END
+Message.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/model/Message.java
+END
+PushConfig.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/model/PushConfig.java
+END
+SymbianMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/model/SymbianMessage.java
+END
+WindowsPhoneMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/model/WindowsPhoneMessage.java
+END
+Tile.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/model/Tile.java
+END

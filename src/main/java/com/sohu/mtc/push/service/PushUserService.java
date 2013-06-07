@@ -1,0 +1,81 @@
+package com.sohu.mtc.push.service;
+
+import java.util.List;
+
+import com.sohu.mtc.push.model.PushConfig;
+import com.sohu.t.api.model.WP7PinUser;
+import com.sohu.t.api.model.others.AppleConfig;
+import com.sohu.t.api.model.others.PushUser;
+import com.sohu.t.api.model.others.WP7Config;
+
+/**
+ * @author jiakangliang
+ *
+ */
+public interface PushUserService {
+	
+	/**
+	 * 注册推送用户，手机客户端在客户登陆后，需要向API注册一次NID，这个NID是手机客户端启动时向第三方推送服务器获取的
+	 * @param queueItem
+	 * @return
+	 */
+	public PushUser registerPushUser(String queueItem);
+	/**
+	 * 从json字符串中解析出某个key的字符串表示
+	 * @param queueItem
+	 * @return
+	 */
+	public String getFromJsonString(String json,String key);
+	/**
+	 * 获取此用户ID与所有设备NID的对应关系
+	 * @param userId
+	 * @return
+	 */
+	public List<PushUser> getUsers(String userId);
+	/**
+	 * 根据设备nId获取此用户对苹果产品的某台设备的配置信息
+	 * @param nId
+	 * @return
+	 */
+	public PushConfig getAppleConfig(String nId);
+	
+	/**
+	 * 根据用户id获取WP7的pin在桌面上的用户的用户列表
+	 * @param userId
+	 * @return
+	 */
+	public List<WP7PinUser> getPinUsers(String userId);
+	
+	/**
+	 * 获取所有不同的pin用户的id列表
+	 * @return
+	 */
+	public List<Long> getAllDistinctPinUserIds();
+	
+	/**
+	 * 根据设备imei号获得设备的推送配置信息
+	 * @param imei
+	 * @return
+	 */
+	public PushConfig getWP7Config(String imei);
+	
+	/**
+	 * 获取苹果的全部报纸推送用户的用户配置信息
+	 * @return
+	 */
+	public List<String> getAllNpAppleConfig();
+	
+	/**
+	 * 获取WP7的全部报纸推送用户的用户配置信息
+	 * @return
+	 */
+	public List<WP7Config> getAllNpWP7Config();
+	
+	/**
+	 * 根据token获取推送用户
+	 * @param nId
+	 * @return
+	 */
+	public PushUser getPushUserByNid(String nId);
+
+}

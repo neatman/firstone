@@ -1,0 +1,63 @@
+Manifest-Version: 1.0
+Built-By: jiakangliang
+Build-Jdk: 1.6.0_16
+Class-Path: json-20090211.jar persistence-api-1.0.jar spring-context-s
+ upport-3.0.5.RELEASE.jar spring-beans-3.0.5.RELEASE.jar spring-contex
+ t-3.0.5.RELEASE.jar spring-aop-3.0.5.RELEASE.jar spring-expression-3.
+ 0.5.RELEASE.jar spring-asm-3.0.5.RELEASE.jar spring-core-3.0.5.RELEAS
+ E.jar xmemcached-1.3.3.jar slf4j-log4j12-1.6.1.jar log4j-1.2.16.jar s
+ lf4j-api-1.6.1.jar apache-mime4j-0.6.1.jar commons-logging-1.1.1.jar 
+ commons-codec-1.4.jar javassist-3.12.1.GA.jar mtc-logser-1.0.jar dom4
+ j-1.6.1.jar xml-apis-1.0.b2.jar jetty-6.1.5.jar servlet-api-2.5-6.1.5
+ .jar jetty-util-6.1.5.jar jsp-api-2.1-6.1.5.jar jsp-2.1-6.1.5.jar cor
+ e-3.1.1.jar ant-1.6.5.jar commons-configuration-1.5.jar commons-colle
+ ctions-3.2.jar commons-lang-2.3.jar commons-digester-1.8.jar commons-
+ beanutils-1.7.0.jar commons-beanutils-core-1.7.0.jar httpclient-4.1.3
+ .jar httpcore-4.1.3.jar bcprov-jdk15-1.46.jar memcached-2.7.1.jar qua
+ rtz-all-1.6.1.jar sohutw-service-core-1.0.1-20130521.063059-51.jar as
+ pectjweaver-1.6.2.jar lucene-core-3.0.2.jar netty-3.2.2.Final.jar tok
+ yocabinet-1.0.jar voltdbclient-1.2.03.jar zkclient-0.1-svn.jar mongo-
+ java-driver-2.6.jar commons-pool-1.5.5.jar commons-httpclient-3.1.jar
+  xlightweb-2.13.2.jar xSocket-2.8.14.jar jstl-1.2.jar poi-3.6.jar sph
+ inx-0.9.9.jar msnlogin-1.0.jar velocity-1.6.jar oro-2.0.8.jar velocit
+ y-tools-view-1.4.jar base64-1.0.jar twittersearch-core-1.0.0.jar xfir
+ e-core-1.2.6.jar activation-1.1.jar mail-1.4.jar wsdl4j-1.6.1.jar sta
+ x-api-1.0.1.jar XmlSchema-1.1.jar wstx-asl-3.2.0.jar jdom-1.0.jar xfi
+ re-aegis-1.2.6.jar stax-utils-20040917.jar xfire-java5-1.2.6.jar xfir
+ e-annotations-1.2.6.jar commons-attributes-api-2.1.jar qdox-1.5.jar x
+ fire-jsr181-api-1.0-M1.jar jsoup-1.3.2.jar tw-app-vote-0.0.8.jar comm
+ ons-httpclient-3.1.jar aspectjlib-1.6.2.jar mysql-connector-java-5.1.
+ 14.jar jdom-1.1.jar spring-jdbc-3.0.5.RELEASE.jar spring-tx-3.0.5.REL
+ EASE.jar spring-data-mongodb-1.0.0.M3.jar spring-data-commons-core-1.
+ 1.0.M1.jar freemarker-2.3.8.jar spring-web-3.0.5.RELEASE.jar aopallia
+ nce-1.0.jar guava-r07.jar keptcollections-1.0.jar twitter-probe-1.1.j
+ ar libthrift-0.5.0.jar libfb303-0.5.0.jar resin-3.0.26.jar fastjson-1
+ .1.8.jar tools-1.0.jar sohutw-commons-1.0-SNAPSHOT.jar zookeeper-3.3.
+ 1.jar jline-0.9.94.jar sohutw-service-common-1.0.1-20130221.095249-6.
+ jar scribelog-1.14.jar sohutw-ginkgo-core-1.2.8.jar zookeeper-3.4.3.j
+ ar proxool-cglib-0.9.1.jar proxool-0.9.1.jar sohutw-ginkgo-default-co
+ nfig-1.0.5.jar sohutw-ginkgo-monitor-1.0.6.jar hyperic-sigar-1.6.4.ja
+ r twitter-vip-auth-core-1.0.jar redis-cloud-client-1.0.9.jar jedis-2.
+ 1.0.jar hessian-4.0.7.jar kryo-2.17.jar reflectasm-1.07-shaded.jar as
+ m-4.0.jar minlog-1.2.jar objenesis-1.2.jar protostuff-runtime-1.0.7.j
+ ar protostuff-api-1.0.7.jar protostuff-collectionschema-1.0.7.jar pro
+ tostuff-core-1.0.7.jar sohutw-localcache-1.1.8.jar jdk-tools-1.0.jar 
+ api-t-sohu-core-2.0.1-SNAPSHOT.jar sns-dal-dao-2.0.5-SNAPSHOT.jar sns
+ -dal-memcahced-2.0.1-SNAPSHOT.jar hibernate-annotations-3.4.0.GA.jar 
+ ejb3-persistence-1.0.2.GA.jar hibernate-commons-annotations-3.1.0.GA.
+ jar hibernate-core-3.3.0.SP1.jar antlr-2.7.6.jar commons-dbcp-1.2.2.j
+ ar hibernate-3.3.1.jar org.json-2.0.jar xstream-1.3.1.jar xpp3_min-1.
+ 1.4c.jar t-wap-single-service-1.2.jar twitterinnerapi-2.0.0.jar opera
+ tion-client-1.2.jar spring-test-3.0.5.RELEASE.jar jta-1.1.jar twitter
+ -app-dao-1.1.1-20130422.070508-89.jar cglib-2.2.2.jar asm-3.3.1.jar a
+ sm-all-3.1.jar twitter-app-base-core-1.1.1-20130506.060524-59.jar spr
+ ing-webmvc-3.0.5.RELEASE.jar json-lib-2.4-jdk15.jar ezmorph-1.0.6.jar
+  servlet-api-2.5.jar apacheJMeter-oauth-2.0.jar restlet-2.0.8.jar blo
+ g-core-1.0.0.jar mtc-map-core-1.0.jar commons-fileupload-1.2.2.jar re
+ stlet-ext-fileupload-2.0.8.jar gson-1.7.1.jar sohu-paike-core-1.0.jar
+  jaxen-1.1.1.jar xercesImpl-2.6.2.jar xom-1.0.jar xmlParserAPIs-2.6.2
+ .jar xalan-2.6.0.jar icu4j-2.6.1.jar pinyin4j-2.5.0.jar httpmime-4.1.
+ jar
+Main-Class: com.sohu.t.push.Starter
+Created-By: Maven Integration for Eclipse
+

@@ -1,0 +1,326 @@
+package com.sohu.mtc.push.service.impl;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.beans.BeanUtils;
+
+import com.sohu.mtc.push.model.PushConfig;
+import com.sohu.mtc.push.service.PushUserService;
+import com.sohu.mtc.push.utils.Constants;
+import com.sohu.mtc.push.utils.MemcacheUtil;
+import com.sohu.sns.dal.dao.exception.DaoException;
+import com.sohu.t.api.model.WP7PinUser;
+import com.sohu.t.api.model.others.AppleConfig;
+import com.sohu.t.api.model.others.PushUser;
+import com.sohu.t.api.model.others.WP7Config;
+import com.sohu.t.api.service.ApiIntegratedService;
+
+/**
+ * @author jiakangliang
+ * 
+ */
+public class PushUserServiceImpl implements PushUserService{
+	public static final SimpleDateFormat	STANDARD_DATEFORMAT	= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static Log						log					= LogFactory.getLog(PushUserServiceImpl.class);
+	protected ApiIntegratedService			apiService;
+	protected MemcacheUtil					memcacheClient		= MemcacheUtil.getInstance();
+
+	public String getFromJsonString(String json,String key)
+	{
+		String userId = "";
+		try
+		{
+			JSONObject jsonObject = new JSONObject(json);
+			userId = jsonObject.getString(key);
+		}
+		catch(JSONException e)
+		{
+			log.debug("handle>>>"+json+">>>error:"+ e);
+			e.printStackTrace();
+		}
+		return userId;
+	}
+
+	@SuppressWarnings("unchecked")
+	public PushUser registerPushUser(String queueItem)
+	{
+		PushUser user = null;
+		try
+		{
+			log.debug("register info>>>>"+queueItem);
+			user = this.getUser(queueItem);
+			//根据nid从数据库中获取调用此注册nid接口前的推送用户
+			PushUser oldUser = apiService.getPushUserByNID(user.getnId());
+			//首先，设备客户端上的获取的推送nid(token|channelURI)一般是不会变的，所以我们将此nid作为唯一标识进行查找、存储或更新
+			//如果oldUser不存在，则说明在此设备上此客户端第一次有用户登录，则将用户uid与nid保存(save)到数据库
+			//如果oldUser存在，说明在此设备上此客户端的帐号管理添加一个帐号时（此时，客户端不会调用删除uid与nid对应关系接口），则首先将此用户(PushUser)从缓存中删除，
+			//再将新的uid与nid更新(update)到数据库
+			if(oldUser != null)
+			{
+				log.debug("<<<<<<<<<<oldUser>>>>>>>>>>>uid:" + oldUser.getUserId() +">>>nid:" +oldUser.getnId());
+				//根据推送用户的userid获取用户所有的推送设备（userid与nid的所有对应关系）
+				Object cacheUsers = MemcacheUtil.getInstance().getObjValue(Constants.KEY_PUSH + oldUser.getUserId());
+				if(cacheUsers != null)
+				{
+					List<PushUser> newUserList = new ArrayList<PushUser>();
+					for(PushUser cacheUser : (List<PushUser>) cacheUsers)
+					{
+						//从用户的所有推送设备列表中去除当前推送设备
+						if((cacheUser.getnId() != null && cacheUser.getnId().trim().length() != 0) && !(cacheUser.getnId().equals(oldUser.getnId())))
+						{
+							newUserList.add(cacheUser);
+						}
+					}
+					MemcacheUtil.getInstance().putObjValue(Constants.KEY_PUSH + oldUser.getUserId(), newUserList, MemcacheUtil.DAY_TTL);
+					log.debug("oldUser "+oldUser.getUserId()+"'s oldList>>>>>>>>>>>>>>>{" + cacheUsers + "}");
+					log.debug("oldUser "+oldUser.getUserId()+"'s newList>>>>>>>>>>>>>>>{" + newUserList + "}");
+				}
+			}
+			//推送的设备有iphone、symbian和windowsphone7，需要注意的是前两个是根据nid进行更新，windowsphone7是根据imei
+			apiService.saveOrUpdatePushUser(user);
+			log.debug("saveOrUpdatePushUser>>>>>>userid:"+user.getUserId()+">>>nid:"+user.getnId());
+			Object cacheObject = MemcacheUtil.getInstance().getObjValue(Constants.KEY_PUSH + user.getUserId());
+			List<PushUser> list = new ArrayList<PushUser>();
+			if(cacheObject != null)
+			{
+				if(cacheObject instanceof List)
+				{
+					list.addAll((List) cacheObject);
+				}
+			}
+			list.add(user);
+			MemcacheUtil.getInstance().putObjValue(Constants.KEY_PUSH + user.getUserId(), list, MemcacheUtil.DAY_TTL);
+			log.debug("newUser "+user.getUserId()+"'s list>>>>>>>>>>>>>>>>>{"+list+"}");
+		}
+		catch(DaoException e)
+		{
+			e.printStackTrace();
+			log.debug("register push user error,push user====[" + user + "]", e);
+		}
+		return user;
+	}
+
+	/**
+	 * 注册nId与uId的对应关系时有两种形式的字符串： 
+	 * 1.user_prefix^userId^clientId^nId^appPush^imei 
+	 * 2.user_prefix^userId^clientId^nId
+	 * 
+	 * @param complexId
+	 * @return
+	 */
+	private PushUser getUser(String complexId)
+	{
+		int userIdStartIndex = complexId.indexOf("^");
+		int userIdEndIndex = complexId.indexOf("^", userIdStartIndex + 1);
+		int clientIdEndIndex = complexId.indexOf("^", userIdEndIndex + 1);
+		int appPushIndex = complexId.indexOf("^", clientIdEndIndex + 1);
+		int imeiIndex = complexId.indexOf("^", appPushIndex + 1);
+		String nId = "";
+		String appPush = "";
+		String imei = "";
+		if(appPushIndex > 0)
+		{
+			nId = complexId.substring(clientIdEndIndex + 1, appPushIndex);
+			appPush = complexId.substring(appPushIndex + 1, imeiIndex);
+			imei = complexId.substring(imeiIndex + 1);
+		}
+		else
+		{
+			nId = complexId.substring(clientIdEndIndex + 1);
+		}
+		String userId = complexId.substring(userIdStartIndex + 1, userIdEndIndex);
+		String clientId = complexId.substring(userIdEndIndex + 1, clientIdEndIndex);
+
+		PushUser user = new PushUser();
+		user.setUserId(userId);
+		user.setnId(nId);
+		user.setClientId(clientId);
+		user.setLastLoginDate(STANDARD_DATEFORMAT.format(new Date()));
+		user.setCreateDate(STANDARD_DATEFORMAT.format(new Date()));
+		user.setAppPush(appPush);
+		user.setImei(imei);
+		return user;
+	}
+
+	public PushConfig getAppleConfig(String nId)
+	{
+		PushConfig pushConfig = null;
+		AppleConfig config = (AppleConfig) memcacheClient.getObjValue(Constants.KEY_CONFIG + nId);
+		if(config == null)
+		{
+			try
+			{
+				//根据nId获取设备配置信息，此配置信息只能是登录用户的配置信息，因为只有是推送用户，才会调用到此步骤（获取推送用户配置信息）
+				config = apiService.getAppaleConfig(nId);
+				if(config != null) memcacheClient.putObjValue(Constants.KEY_CONFIG + nId, config, MemcacheUtil.DAY_TTL * 10);
+			}
+			catch(DaoException e)
+			{
+				log.error("error get apple config >>>nId"+nId, e);
+				e.printStackTrace();
+			}
+		}
+		//如果config为null，则是老版本iphone客户端用户配置信息，也就是说从未修改过推送配置信息，则也将不会在数据库添加一条配置信息记录
+		//此时我们看作所有新消息推送配置全部打开
+		if(config != null)
+		{
+			log.debug("getAppleConfig-->nid="+config.getNid()+",uid="+config.getUid()+",cm="+config.getCm()+",mt="+config.getMt()+",fd="+config.getFd()+",dm="+config.getDm());
+			pushConfig = new PushConfig();
+			BeanUtils.copyProperties(config, pushConfig);
+		}
+		return pushConfig;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PushUser> getUsers(String userId)
+	{
+		Object object = memcacheClient.getObjValue(Constants.KEY_PUSH + userId);
+		if(object instanceof List)
+		{
+			return (List) object;
+		}
+		else
+		{
+			List<PushUser> userList = null;
+			try
+			{
+				userList = apiService.loadNIDByUserId(userId);
+				memcacheClient.putObjValue(Constants.KEY_PUSH + userId, userList, MemcacheUtil.DAY_TTL);
+			}
+			catch(DaoException e)
+			{
+				log.error("error get push user list >>>userId>>>"+userId, e);
+				e.printStackTrace();
+			}
+			return userList;
+		}
+	}
+
+	public void setApiService(ApiIntegratedService apiService)
+	{
+		this.apiService = apiService;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<WP7PinUser> getPinUsers(String userId)
+	{
+		Object object = memcacheClient.getObjValue(Constants.KEY_PIN_USER + userId);
+		if(object instanceof List)
+		{
+			return (List<WP7PinUser>) object;
+		}
+		else
+		{
+			List<WP7PinUser> pinUserList = null;
+			try
+			{
+				pinUserList = apiService.getWP7PinUsersByUserId(userId);
+				if(pinUserList != null && pinUserList.size() > 0)
+				{
+					memcacheClient.putObjValue(Constants.KEY_PIN_USER, pinUserList, MemcacheUtil.DAY_TTL);
+				}
+			}
+			catch(DaoException e)
+			{
+				log.error("error get pin user list >>>userId>>>"+userId, e);
+				e.printStackTrace();
+			}
+			return pinUserList;
+		}
+	}
+
+	public List<Long> getAllDistinctPinUserIds()
+	{
+		List<Long> pinUserIdList = null;
+		try
+		{
+			pinUserIdList = apiService.getAllDistinctWP7PinUserIds();
+		}
+		catch(DaoException e)
+		{
+			log.error("getAllDistinctPinUserIds error", e);
+			e.printStackTrace();
+		}
+		return pinUserIdList;
+	}
+
+	public PushConfig getWP7Config(String imei)
+	{
+		PushConfig pushConfig = null;
+		WP7Config config = (WP7Config) memcacheClient.getObjValue(Constants.KEY_CONFIG + imei);
+		if(config == null)
+		{
+			try
+			{
+				config = apiService.getWP7Config(imei);
+				if(config != null) memcacheClient.putObjValue(Constants.KEY_CONFIG + imei, config, MemcacheUtil.DAY_TTL * 10);
+			}
+			catch(DaoException e)
+			{
+				log.error("error get wp7 config >>>imei>>>"+imei, e);
+				e.printStackTrace();
+			}
+		}
+		if(config != null)
+		{
+			pushConfig = new PushConfig();
+			BeanUtils.copyProperties(config, pushConfig);
+		}
+		return pushConfig;
+	}
+
+	@Override
+	public List<String> getAllNpAppleConfig()
+	{
+		List<String> appleConfigs = null;
+		try
+		{
+			appleConfigs = apiService.getAllNpAppleConfig();
+		}
+		catch(DaoException e)
+		{
+			log.debug("get all newspaper apple configs error:" + e);
+			e.printStackTrace();
+		}
+		return appleConfigs;
+	}
+
+	@Override
+	public List<WP7Config> getAllNpWP7Config()
+	{
+		List<WP7Config> wp7Configs = null;
+		try
+		{
+			wp7Configs = apiService.getAllNpWP7Config();
+		}
+		catch(DaoException e)
+		{
+			log.debug("get all newspaper wp7 configs error:" + e);
+			e.printStackTrace();
+		}
+		return wp7Configs;
+	}
+
+	@Override
+    public PushUser getPushUserByNid(String nId)
+    {
+		PushUser pushUser = null;
+		try
+		{
+			pushUser = apiService.getPushUserByNID(nId);
+		}
+		catch(DaoException e)
+		{
+			log.debug("get pushuser by nid error:"+e);
+		}
+		return pushUser;
+    }
+
+}

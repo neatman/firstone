@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/exception
+END
+NullIdException.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/exception/NullIdException.java
+END
+DuplicateDeviceException.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/exception/DuplicateDeviceException.java
+END
+NullDeviceTokenException.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/exception/NullDeviceTokenException.java
+END
+UnknownDeviceException.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/exception/UnknownDeviceException.java
+END

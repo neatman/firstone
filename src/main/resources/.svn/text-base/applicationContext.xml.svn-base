@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:sca="http://www.springframework.org/schema/sca"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/sca http://www.springframework.org/schema/sca/spring-sca.xsd">
+    <!-- SOA -->
+    <import resource="classpath:ginkgo-service-rmi-client.xml" />
+    <import resource="classpath:twitter-api-rmi-client.xml" />
+    
+    <!-- 线程池配置 -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">  
+		<property name="corePoolSize" value="200" />  
+		<property name="maxPoolSize" value="400" />  
+		<property name="queueCapacity" value="1000" />
+		<property name="keepAliveSeconds" value="300" />
+	</bean>    
+	
+	<bean id="microblogTaskExecutor" class="com.sohu.mtc.push.task.MicroblogTaskExecutor">
+		<property name="pushUserService" ref="pushUserService"></property>
+		<property name="newsPush" ref="newsPush"></property>
+		<constructor-arg ref="taskExecutor"></constructor-arg>
+	</bean>
+	
+	<bean id="sohuNewsTaskExecutor" class="com.sohu.mtc.push.task.SohuNewsTaskExecutor">
+		<constructor-arg ref="taskExecutor"></constructor-arg>
+	</bean>
+	
+	<bean id="wp7PinUserTaskExecutor" class="com.sohu.mtc.push.task.WP7PinUserTaskExecutor">
+		<property name="pushUserService" ref="pushUserService"></property>
+		<property name="timelineService" ref="timelineService"></property>
+		<constructor-arg ref="taskExecutor"></constructor-arg>
+	</bean>
+	
+<!--     <bean id="apiIntegratedService"  -->
+<!--           class="com.sohu.t.api.core.RmiProxyFactoryBean"> -->
+<!--         <property name="serviceUrls"> -->
+<!--         	<list> -->
+<!-- 				<value>rmi://localhost:8094/ApiIntegratedRMIService</value>        	 -->
+<!--         	</list> -->
+<!--         </property> -->
+<!--         <property name="serviceInterface"> -->
+<!--             <value>com.sohu.t.api.service.ApiIntegratedService</value> -->
+<!--         </property> -->
+<!--         <property name="refreshStubOnConnectFailure"> -->
+<!--         	<value>true</value> -->
+<!--         </property> -->
+<!--     </bean> -->
+    
+    <bean id="pushUserService" class="com.sohu.mtc.push.service.impl.PushUserServiceImpl">
+	    <property name="apiService" ref="apiIntegratedService"></property>
+	</bean>
+	
+	<bean id="timelineService" class="com.sohu.mtc.push.service.impl.TimelineServiceImpl">
+	  <property name="userNumService" ref="userNumService"></property>
+	  <property name="myTimelineService" ref="myTimelineService"></property>
+	  <property name="msgService" ref="msgService"></property>
+	</bean>
+	
+    <!-- 以下是定时任务 -->
+	
+	<!--ONA推送的重试机制，每隔30分钟进行重试，对第一次发送失败的所有设备重新发送，目前只重试一次-->
+    <bean name="onaRetry" class="com.sohu.mtc.push.task.schedule.RepeatPushSymbian">
+    	<property name="taskExecutor" ref="taskExecutor"></property>
+    </bean>
+	<!--每隔1小时调用苹果服务器提供的接口收集由于某些原因已经不能再被push的设备nId 将它们从缓存和数据库中删除-->
+    <bean name="iosClear" class="com.sohu.mtc.push.task.schedule.IphonePushClear">
+		<property name="userService" ref="apiIntegratedService" />
+    </bean>
+    <!--周一至周五的上午七点半下午四点半和周六日的上午九点半会向ios平台设备推送精选新闻早晚报-->
+    <bean name="newsPush" class="com.sohu.mtc.push.task.schedule.NewsPush">
+    	<property name="pushUserService" ref="pushUserService" />
+    </bean>
+    
+    <bean id="onaRetryDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+       <property name="targetObject">
+           <ref bean="onaRetry" />
+       </property>
+       <property name="targetMethod">
+           <value>pushMessage</value>
+       </property>
+    </bean>
+    <bean id="iosClearDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+       <property name="targetObject">
+           <ref bean="iosClear" />
+       </property>
+       <property name="targetMethod">
+           <value>clearAppleDevices</value>
+       </property>
+    </bean>
+    
+    <bean id="cronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerBean">
+       <property name="jobDetail">
+           <ref bean="onaRetryDetail" />
+       </property>
+       <property name="cronExpression">
+           <value>0 0/30 * * * ?</value>
+       </property>
+    </bean>
+    <bean id="cronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerBean">
+       <property name="jobDetail">
+           <ref bean="iosClearDetail" />
+       </property>
+       <property name="cronExpression">
+           <value>0 0 3/6 * * ?</value>
+       </property>
+    </bean>
+    
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+       <property name="triggers">
+           <list>
+              <ref local="cronTrigger1" />
+              <ref local="cronTrigger2" />
+           </list>
+       </property>
+    </bean>
+    
+</beans>

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/t-sohu/!svn/ver/45790/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/thread
+END
+IOSNewsPushThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/t-sohu/!svn/ver/45790/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/thread/IOSNewsPushThread.java
+END
+SohuNewsClientThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/thread/SohuNewsClientThread.java
+END
+WP7NewsPushThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/t-sohu/!svn/ver/45664/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/thread/WP7NewsPushThread.java
+END
+MicroblogClientThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/thread/MicroblogClientThread.java
+END
+WP7PinUserClientThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/thread/WP7PinUserClientThread.java
+END
+IdleHttpConnMonitorThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/thread/IdleHttpConnMonitorThread.java
+END

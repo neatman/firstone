@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/config
+END
+sap-jetty-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/config/sap-jetty-config.xml
+END
+CA.p12
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/config/CA.p12
+END
+2012_07_10.p12
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/config/2012_07_10.p12
+END
+log4j.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/config/log4j.xml
+END

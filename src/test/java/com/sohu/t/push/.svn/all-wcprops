@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/t-sohu/!svn/ver/45524/web2.0/mtc-common/trunk/mtc-push/src/test/java/com/sohu/t/push
+END
+TSHttpClientUtils3.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/t-sohu/!svn/ver/45507/web2.0/mtc-common/trunk/mtc-push/src/test/java/com/sohu/t/push/TSHttpClientUtils3.java
+END
+TestKestrel.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/t-sohu/!svn/ver/45524/web2.0/mtc-common/trunk/mtc-push/src/test/java/com/sohu/t/push/TestKestrel.java
+END
+HttpClientTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/t-sohu/!svn/ver/45507/web2.0/mtc-common/trunk/mtc-push/src/test/java/com/sohu/t/push/HttpClientTest.java
+END

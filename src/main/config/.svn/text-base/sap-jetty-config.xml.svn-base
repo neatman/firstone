@@ -1,0 +1,34 @@
+<?xml version="1.0"  encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure id="Server" class="org.mortbay.jetty.Server">
+	<New id="connector"
+		class="org.mortbay.jetty.nio.SelectChannelConnector">
+		<Set name="port">
+			<SystemProperty name="jetty.port" default="7070" />
+		</Set>
+	</New>
+	<Set name="Connectors">
+		<Array type="org.mortbay.jetty.Connector">
+			<Item>
+				<Ref id="connector" />
+			</Item>
+		</Array>
+	</Set>
+	<New id="asyncServlet" class="org.mortbay.jetty.servlet.Context">
+		<Set name="contextPath">/</Set>
+		<Set name="resourceBase">
+			<SystemProperty name="jetty.docroot" default=".\" />
+		</Set>
+		<Call name="addServlet">
+			<Arg>com.sohu.t.jetty.PushServlet</Arg>
+			<Arg>/newVersion</Arg>
+		</Call>
+	</New>
+	<Set name="handlers">
+		<Array type="org.mortbay.jetty.Handler">
+			<Item>
+				<Ref id="asyncServlet" />
+			</Item>
+		</Array>
+	</Set>
+</Configure>

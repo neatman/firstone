@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/t-sohu/!svn/ver/45712/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils
+END
+MemcacheUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/t-sohu/!svn/ver/45548/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/MemcacheUtil.java
+END
+SSLClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/SSLClient.java
+END
+SymbianHttpUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/SymbianHttpUtil.java
+END
+WindowsPhoneHttpUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/t-sohu/!svn/ver/42071/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/WindowsPhoneHttpUtil.java
+END
+IosPushClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/t-sohu/!svn/ver/45712/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/IosPushClient.java
+END
+Constants.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/t-sohu/!svn/ver/45677/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/Constants.java
+END
+HttpClientUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/t-sohu/!svn/ver/40872/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/HttpClientUtil.java
+END
+KestrelQueueUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/KestrelQueueUtil.java
+END
+BeanFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/utils/BeanFactory.java
+END

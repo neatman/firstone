@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/t-sohu/!svn/ver/45799/web2.0/mtc-common/trunk/mtc-push
+END
+start.sh
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/t-sohu/!svn/ver/40682/web2.0/mtc-common/trunk/mtc-push/start.sh
+END
+release.sh
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/t-sohu/!svn/ver/40575/web2.0/mtc-common/trunk/mtc-push/release.sh
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/t-sohu/!svn/ver/45757/web2.0/mtc-common/trunk/mtc-push/pom.xml
+END
+stop.sh
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/t-sohu/!svn/ver/40577/web2.0/mtc-common/trunk/mtc-push/stop.sh
+END

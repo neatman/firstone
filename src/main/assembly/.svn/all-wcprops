@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/assembly
+END
+run-with-jconsole.sh
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/assembly/run-with-jconsole.sh
+END
+dep.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/assembly/dep.xml
+END
+run.bat
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/assembly/run.bat
+END
+run.sh
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/assembly/run.sh
+END

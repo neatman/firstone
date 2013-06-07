@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/data
+END
+Device.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/data/Device.java
+END
+PayLoad.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/data/PayLoad.java
+END
+PayLoadCustomAlert.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/ssl/data/PayLoadCustomAlert.java
+END

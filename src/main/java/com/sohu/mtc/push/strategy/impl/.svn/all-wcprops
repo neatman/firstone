@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/t-sohu/!svn/ver/45664/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/strategy/impl
+END
+NewsPushStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/t-sohu/!svn/ver/45664/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/strategy/impl/NewsPushStrategy.java
+END
+Wp7PushStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/t-sohu/!svn/ver/45664/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/strategy/impl/Wp7PushStrategy.java
+END
+SymbianPushStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/t-sohu/!svn/ver/45664/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/strategy/impl/SymbianPushStrategy.java
+END
+IosPushStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/t-sohu/!svn/ver/45664/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/strategy/impl/IosPushStrategy.java
+END

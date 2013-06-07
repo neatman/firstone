@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/t-sohu/!svn/ver/45799/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/task/schedule
+END
+IosPushClearHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/t-sohu/!svn/ver/45712/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/task/schedule/IosPushClearHelper.java
+END
+RepeatPushSymbian.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/t-sohu/!svn/ver/40569/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/task/schedule/RepeatPushSymbian.java
+END
+IphonePushClear.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/t-sohu/!svn/ver/45790/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/task/schedule/IphonePushClear.java
+END
+NewsPush.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/t-sohu/!svn/ver/45799/web2.0/mtc-common/trunk/mtc-push/src/main/java/com/sohu/mtc/push/task/schedule/NewsPush.java
+END
